@@ -1,0 +1,16 @@
+*IO*
+OS_Lib
+OS_Exit
+GNAT
+SpawnN
+TimeVal
+sec
+usec
+*RSS*
+*MS*
+RUSAGE_CHILDREN
+getrusage
+posix_spawn
+waitpid
+RUsage
+chars_ptr

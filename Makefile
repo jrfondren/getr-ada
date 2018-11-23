@@ -5,8 +5,9 @@ all:: check getr
 
 check:: env_check
 	./env_check
-	gnatpp $(STYLE) --output=getr.pp getr.adb
+	gnatpp $(STYLE) --output-force=getr.pp getr.adb
 	diff -q getr.pp getr.adb
+	rm -fv getr.pp
 
 clean::
 	gnat clean getr.adb
