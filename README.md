@@ -8,7 +8,6 @@
 - glibc's sys/resource.h is such that gcc's own translator created nearly useless Ada code from it: https://gist.github.com/jrfondren/1d98e9dcc056184f1317a1ac47e59673
 - the 'florist' package of POSIX extensions to Ada would've been useful, but that package doesn't seem to be available on OpenBSD
 - `GNAT.OS_Lib.Spawn` and friends are incapable of running a command with no arguments (although the OS always expects the command itself as its first argument, libGNAT already supplies that first arugment for you)
-- this code fails to free some dynamically allocated memory in the `Spawns` procedure
 
 ## build
 ```
