@@ -1,4 +1,5 @@
 STYLE=--name-mixed-case --based-grouping=3 -D$(PWD)/dict
+GFLAGS=-O3 -gnaty -gnatwa
 
 all:: check getr
 
@@ -12,7 +13,7 @@ clean::
 	rm -fv env_check
 
 getr: getr.adb
-	gnat make -gnaty $<
+	gnat make $(GFLAGS) $<
 
 env_check: env_check.c
 	gcc -O3 -Wall -o $@ $<
