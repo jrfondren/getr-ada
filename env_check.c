@@ -4,7 +4,7 @@
 #include <assert.h>
 
 int main (void) {
-	/* is this harcoded constant wrong? */
+	/* is this hardcoded constant wrong? */
 	assert(RUSAGE_CHILDREN == -1);
 
 	/* is this not a 64-bit system? */
