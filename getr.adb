@@ -164,5 +164,6 @@ begin
       Put_Line
         (Standard_Error,
          "usage: " & Command_Name & " <n> <command> [<args> ...]");
+      GNAT.OS_Lib.OS_Exit (1);
    end if;
 end Getr;
