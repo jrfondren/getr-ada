@@ -1,0 +1,83 @@
+.Dd November 29, 2018
+.Dt GETR 1
+.Os POSIX
+.Sh NAME
+.Nm getr
+.Nd getrusage() wrapper for simple benchmarks
+.Sh SYNOPSIS
+.PP
+\fBgetr\fR
+.Ar count
+.Ar program
+.Op Ar args Ar ...
+.Sh OUTPUT
+.Li "$ getr 1000 ./fizzbuzz >/dev/null"
+.nf
+.Li "User time      : 0 s, 307494 us"
+.nf
+.Li "System time    : 0 s, 160173 us"
+.nf
+.Li "Time           : 467 ms (0.467 ms/per)"
+.nf
+.Li "Max RSS        : 1684 kB"
+.nf
+.Li "Page reclaims  : 65338"
+.nf
+.Li "Page faults    : 0"
+.nf
+.Li "Block inputs   : 0"
+.nf
+.Li "Block outputs  : 0"
+.nf
+.Li "vol ctx switches   : 1004"
+.nf
+.Li "invol ctx switches : 29"
+.nf
+.Sh DESCRIPTION
+.PP
+\fBgetr\fR is a simple wrapper around the \fBgetrusage\fR(2)
+syscall, which can be relied on for basic resource usage reports
+under Linux, OpenBSD, and macOS (among others). A child command
+is repeatedly spawned and waited for, and then a
+\fBRUSAGE_CHILDREN\fR report is generated. This program was
+created as the author was used to very simple bash loops to test
+performance, which he then found didn't work at all under ksh on
+OpenBSD. \fBgetr\fR is just as easy and just as simple.
+.Sh EXIT STATUS
+.PP
+\fBgetr\fR exits with status 1 if any \fBwaitpid\fR(2) or
+\fBposix_spawn\fR(2) syscalls fail, or if its own arguments
+aren't understood. It exits with status 0 in all other cases,
+including if the spawned program returns a nonzero exit status.
+.Sh EXAMPLES
+.PP
+\fBgetr 1000 ./fizzbuzz > /dev/null\fR
+
+.PP
+\fBfizzbuzz\fR is invoked 1000 times, with no arguments, and with
+\fBgetr\fR's own (and therefore \fBfizzbuzz\fR's) standard output
+piped to \fB/dev/null\fR. The resulting usage report would still
+be printed to standard error.
+
+.PP
+\fBgetr 100 $(which python3) -c ''\fR
+
+.PP
+The full path to \fBpython3\fR is asked, 100 times, to evaluate
+the empty string as a Python script.
+.Sh SEE ALSO
+.PP
+.Xr getrusage 2 ,
+.Xr which 1 ,
+.Xr time 1 ,
+.Xr perf 1 ,
+.Xr valgrind 1 .
+.Sh BUGS
+.Bl -dash -compact
+.It
+\fBgetr\fR displays the wrong units for RSS on macOS.
+.It
+\fBgetr\fR could be more flexible, with
+.Ev PATH
+resolution and its own
+flags.

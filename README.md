@@ -14,6 +14,11 @@
 make
 ```
 
+## RTFM
+```
+man ./getr.mdoc
+```
+
 ## usage and examples
 ```
 $ getr 1000 ./fizzbuzz >/dev/null
@@ -57,6 +62,5 @@ invol ctx switches : 10
 - no $PATH resolution occurs
 - output is in an ad-hoc text format that machine consumers would need to parse manually
 - only posix_spawn is used, but fork&exec might be preferred for timings more like a fork&exec-using application
-- this command lacks a manpage
 - 'getr' is probably a poor name
 - kB and ms are always used even when number ranges might be easier to understand in MB or s, or GB or min:s
