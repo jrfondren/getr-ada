@@ -38,14 +38,21 @@ procedure Getr is
    pragma Import (C, getrusage, "getrusage");
    RUSAGE_CHILDREN : constant Integer := -1;
 
-   function posix_spawn (Pid : access Integer;
-      Path : Interfaces.C.Strings.chars_ptr; File_Actions : System.Address;
-      Attrp                  : System.Address; Argv : System.Address;
-      Envp                   : System.Address) return Integer;
+   function posix_spawn
+     (Pid          : access Integer;
+      Path         : Interfaces.C.Strings.chars_ptr;
+      File_Actions : System.Address;
+      Attrp        : System.Address;
+      Argv         : System.Address;
+      Envp         : System.Address)
+      return Integer;
    pragma Import (C, posix_spawn, "posix_spawn");
 
-   function waitpid (Pid : Integer; Wstatus : System.Address;
-      Options            : Integer) return Integer;
+   function waitpid
+     (Pid     : Integer;
+      Wstatus : System.Address;
+      Options : Integer)
+      return Integer;
    pragma Import (C, waitpid, "waitpid");
 
    Usage  : aliased RUsage;
@@ -68,8 +75,11 @@ procedure Getr is
    begin
       Put (Standard_Error, Key & Image (MS) & " ms (");
       Put
-        (Standard_Error, Float (MS) / Float (SpawnN), Fore => 0, Aft => 3,
-         Exp                                               => 0);
+        (Standard_Error,
+         Float (MS) / Float (SpawnN),
+         Fore => 0,
+         Aft  => 3,
+         Exp  => 0);
       Put_Line (Standard_Error, " ms/per)");
    end Put_Time;
 

@@ -1,4 +1,4 @@
-STYLE=--name-mixed-case --based-grouping=3 -D$(PWD)/dict
+STYLE=--name-mixed-case --based-grouping=3 --par-threshold=3 --call-threshold=3 -D$(PWD)/dict
 GFLAGS=-O3 -gnaty -gnatwa
 
 all:: check getr
