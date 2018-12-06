@@ -1,7 +1,10 @@
 STYLE=--name-mixed-case --based-grouping=3 --par-threshold=3 --call-threshold=3 -D$(PWD)/dict
 GFLAGS=-O3 -gnaty -gnatwa
 
-all:: check getr
+all:: config check getr
+
+config::
+	[[ "$$(uname)" == "Darwin" ]] && perl -i -pe 's/False/True/ if /\b macOS \b/x' build_options.ads
 
 check:: env_check
 	./env_check

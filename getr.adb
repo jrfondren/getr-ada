@@ -6,6 +6,7 @@ with GNAT.OS_Lib;
 with Ada.Command_Line;     use Ada.Command_Line;
 with System;
 with Ada.Unchecked_Conversion;
+with Build_Options;
 
 procedure Getr is
    type Long is mod 2**64;
@@ -107,7 +108,11 @@ procedure Getr is
          Put_Times ("User time      : ", Usage.User_Time);
          Put_Times ("System time    : ", Usage.System_Time);
          Put_Time ("Time           : ", Time_MS);
-         Put_Unit ("Max RSS        : ", Usage.Max_RSS, "kB");
+         if Build_Options.macOS then
+            Put_Unit ("Max RSS        : ", Usage.Max_RSS / 1024, "kB");
+         else
+            Put_Unit ("Max RSS        : ", Usage.Max_RSS, "kB");
+         end if;
          Put_Val ("Page reclaims  : ", Usage.Minor_Faults);
          Put_Val ("Page faults    : ", Usage.Major_Faults);
          Put_Val ("Block inputs   : ", Usage.In_Blocks);
