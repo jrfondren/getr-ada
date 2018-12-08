@@ -4,7 +4,7 @@ GFLAGS=-O3 -gnaty -gnatwa
 all:: config check getr
 
 config::
-	[[ "$$(uname)" == "Darwin" ]] && perl -i -pe 's/False/True/ if /\b macOS \b/x' build_options.ads
+	-[[ "$$(uname)" == "Darwin" ]] && perl -i -pe 's/False/True/ if /\b macOS \b/x' build_options.ads
 
 check:: env_check
 	./env_check
